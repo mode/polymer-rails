@@ -51,6 +51,8 @@ module Polymer
       def absolute_asset_path(file)
         search_file = file.sub(/^(\.\.\/)+/, '/').sub(/^\/*/, '')
         ::Rails.application.assets.paths.each do |path|
+          puts '>>>>>>>>'
+          puts search_file + ' + ' + path
           file_list = Dir.glob( "#{File.absolute_path search_file, path }*")
           return file_list.first unless file_list.blank?
         end
