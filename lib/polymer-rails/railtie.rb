@@ -22,6 +22,8 @@ module Polymer
           puts '-------'
           if /\/components$/.match(context.root_path)
             Polymer::Rails::ComponentsProcessor.new(context, data).process
+          else
+            data
           end
         end
       end
