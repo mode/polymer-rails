@@ -20,6 +20,7 @@ module Polymer
 
       def require_imports
         @component.imports.each do |import|
+          puts
           @context.require_asset absolute_asset_path(import.attributes['href'].value)
           import.remove
         end
@@ -58,7 +59,9 @@ module Polymer
           return file_list.first unless file_list.blank?
         end
         components = Dir.glob("#{File.absolute_path file, File.dirname(@context.pathname)}*")
-        return components.blank? ? nil : components.first
+        puts '<<><><><><'
+        puts "#{File.absolute_path file, File.dirname(@context.pathname)}*"
+        return components.blank? ? '' : components.first
       end
 
       def find_asset(asset_path)
