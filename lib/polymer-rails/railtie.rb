@@ -18,7 +18,7 @@ module Polymer
         app.assets.register_preprocessor "text/html", Polymer::Rails::DirectiveProcessor
         app.assets.register_postprocessor 'text/html', :web do |context, data|
           puts '%%%%%%%%'
-          puts context
+          puts context.root_path
           puts '-------'
           puts data
           Polymer::Rails::ComponentsProcessor.new(context, data).process
