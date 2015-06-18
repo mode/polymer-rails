@@ -20,8 +20,9 @@ module Polymer
           puts '%%%%%%%%'
           puts context.root_path
           puts '-------'
-          puts data
-          Polymer::Rails::ComponentsProcessor.new(context, data).process
+          if /\/components$/.match(context.root_path)
+            Polymer::Rails::ComponentsProcessor.new(context, data).process
+          end
         end
       end
 
