@@ -16,13 +16,13 @@ module Polymer
       initializer :add_preprocessors do |app|
         app.assets.register_mime_type "text/html", ".html"
         app.assets.register_preprocessor "text/html", Polymer::Rails::DirectiveProcessor
-        app.assets.register_postprocessor 'text/html', :web do |context, data|
-          unless /webapp\/app\/assets\/javascripts$/.match(context.root_path)
-            Polymer::Rails::ComponentsProcessor.new(context, data)
-          else
-            data
-          end
-        end
+        app.assets.register_postprocessor 'text/html', Polymer::Rails::ComponentsProcessor
+        #  unless /webapp\/app\/assets\/javascripts$/.match(context.root_path)
+        #    Polymer::Rails::ComponentsProcessor.new(context, data)
+        #  else
+        #    data
+        #  end
+        #end
       end
 
     end

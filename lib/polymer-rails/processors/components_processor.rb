@@ -4,16 +4,21 @@ module Polymer
   module Rails
     class ComponentsProcessor
 
-      def initialize(context, data)
-        @context = context
-        @component = Component.new(data)
+      def initialize(file, &block)
+        @data = block.call
       end
 
-      def call(input)
-        inline_styles
-        inline_javascripts
-        require_imports
-        @component.stringify
+      def render(context)
+        unless /webapp\/app\/assets\/javascripts$/.match(context.root_path)
+          @context = context
+          @component = Component.new(@data)
+          inline_styles
+          inline_javascripts
+          require_imports
+          @component.stringify
+        else
+          @data
+        end
       end
 
     private
