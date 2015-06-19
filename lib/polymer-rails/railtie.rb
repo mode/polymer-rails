@@ -20,7 +20,7 @@ module Polymer
           puts '%%%%%%%%'
           puts context.root_path
           puts '-------'
-          if /\/components$/.match(context.root_path)
+          unless /webapp\/app\/assets\/javascripts$/.match(context.root_path)
             Polymer::Rails::ComponentsProcessor.new(context, data).process
           else
             data
