@@ -18,7 +18,7 @@ module Polymer
         app.assets.register_preprocessor "text/html", Polymer::Rails::DirectiveProcessor
         app.assets.register_postprocessor 'text/html', :web do |context, data|
           unless /webapp\/app\/assets\/javascripts$/.match(context.root_path)
-            Polymer::Rails::ComponentsProcessor.new(context, data).process
+            Polymer::Rails::ComponentsProcessor.new(context, data)
           else
             data
           end

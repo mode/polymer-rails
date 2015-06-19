@@ -2,14 +2,14 @@ require 'polymer-rails/component'
 
 module Polymer
   module Rails
-    class ComponentsProcessor < Sprockets::Processor
+    class ComponentsProcessor
 
       def initialize(context, data)
         @context = context
         @component = Component.new(data)
       end
 
-      def process
+      def call(input)
         inline_styles
         inline_javascripts
         require_imports
