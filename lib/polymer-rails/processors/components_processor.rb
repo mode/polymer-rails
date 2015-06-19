@@ -52,16 +52,11 @@ module Polymer
       def absolute_asset_path(file)
         search_file = file.sub(/^(\.\.\/)+/, '/').sub(/^\/*/, '')
         ::Rails.application.assets.paths.each do |path|
-          puts '>>>>>>>>'
           file_list = Dir.glob( "#{File.absolute_path search_file, path }*")
-          puts search_file + ' + ' + path + ' + ' + file_list.to_s
-
           return file_list.first unless file_list.blank?
         end
         components = Dir.glob("#{File.absolute_path file, File.dirname(@context.pathname)}*")
-        puts '<<><><><><'
-        puts "#{File.absolute_path file, File.dirname(@context.pathname)}*"
-        return components.blank? ? '' : components.first
+        return components.blank? ? nil : components.first
       end
 
       def find_asset(asset_path)
