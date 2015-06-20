@@ -2,7 +2,8 @@ require 'polymer-rails/component'
 
 module Polymer
   module Rails
-    module ComponentsProcessor
+    class ComponentsProcessor
+      VERSION = '1'
 
       def self.instance
         @instance ||= new
