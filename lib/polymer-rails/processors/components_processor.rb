@@ -2,26 +2,42 @@ require 'polymer-rails/component'
 
 module Polymer
   module Rails
-    class ComponentsProcessor
+    module ComponentsProcessor
 
-      def initialize(file, &block)
-        @data = block.call
+      def initialize(options = {}, &block)
+        #@data = block.call
       end
 
-      def render(context)
+      def call(input)
+        context = input[:environment].context_class.new(input)
         puts '>>>>>'
         puts context.root_path
         unless /webapp\/app\/assets\/javascripts$/.match(context.root_path)
           @context = context
-          @component = Component.new(@data)
+          @component = Component.new(input[:data])
           inline_styles
           inline_javascripts
           require_imports
           @component.stringify
         else
-          @data
+          nil
         end
       end
+
+      # def render(context)
+      #   puts '>>>>>'
+      #   puts context.root_path
+      #   unless /webapp\/app\/assets\/javascripts$/.match(context.root_path)
+      #     @context = context
+      #     @component = Component.new(@data)
+      #     inline_styles
+      #     inline_javascripts
+      #     require_imports
+      #     @component.stringify
+      #   else
+      #     @data
+      #   end
+      # end
 
     private
 
