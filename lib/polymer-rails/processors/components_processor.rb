@@ -25,14 +25,18 @@ module Polymer
 
       def call(input)
         context = input[:environment].context_class.new(input)
-        puts '>>>>>'
-        puts context.root_path
+
         unless /webapp\/app\/assets\/javascripts$/.match(context.root_path)
+          puts '>>>>>'
+          puts context.root_path
           @context = context
+          puts input[:data]
+          puts '>>>>>>>>>>>><<<<<<<<<<<<<'
           @component = Component.new(input[:data])
           inline_styles
           inline_javascripts
           require_imports
+          puts @component.stringify
           @component.stringify
         else
           nil
