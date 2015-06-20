@@ -4,8 +4,22 @@ module Polymer
   module Rails
     module ComponentsProcessor
 
-      def initialize(options = {}, &block)
-        #@data = block.call
+      def self.instance
+        @instance ||= new
+      end
+
+      def self.call(input)
+        instance.call(input)
+      end
+
+      def self.cache_key
+        instance.cache_key
+      end
+
+      attr_reader :cache_key
+
+      def initialize(options = {})
+        @cache_key = [self.class.name, VERSION, options].freeze
       end
 
       def call(input)
@@ -23,22 +37,6 @@ module Polymer
           nil
         end
       end
-
-      # def render(context)
-      #   puts '>>>>>'
-      #   puts context.root_path
-      #   unless /webapp\/app\/assets\/javascripts$/.match(context.root_path)
-      #     @context = context
-      #     @component = Component.new(@data)
-      #     inline_styles
-      #     inline_javascripts
-      #     require_imports
-      #     @component.stringify
-      #   else
-      #     @data
-      #   end
-      # end
-
     private
 
       def require_imports
