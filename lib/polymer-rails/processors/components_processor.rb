@@ -30,7 +30,7 @@ module Polymer
           puts '>>>>>'
           puts context.root_path
           @context = context
-          puts input[:data]
+          puts input.inspect
           puts '>>>>>>>>>>>><<<<<<<<<<<<<'
           @component = Component.new(input[:data])
           inline_styles
