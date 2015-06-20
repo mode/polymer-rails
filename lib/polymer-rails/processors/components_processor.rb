@@ -9,6 +9,8 @@ module Polymer
       end
 
       def render(context)
+        puts '>>>>>'
+        puts context.root_path
         unless /webapp\/app\/assets\/javascripts$/.match(context.root_path)
           @context = context
           @component = Component.new(@data)
